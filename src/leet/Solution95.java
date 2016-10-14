@@ -24,18 +24,18 @@ public class Solution95 {
             return rst;
         }
 
-            for(int i=start; i<=end; i++){
-                ArrayList<TreeNode> left = generate(start, i-1);
-                ArrayList<TreeNode> right = generate(i+1, end);
-                for(TreeNode l: left){
-                    for(TreeNode r: right){
-                        TreeNode root = new TreeNode(i);
-                        root.left = l;
-                        root.right = r;
-                        rst.add(root);
-                    }
+        for(int i=start; i<=end; i++){
+            ArrayList<TreeNode> left = generate(start, i-1);
+            ArrayList<TreeNode> right = generate(i+1, end);
+            for(TreeNode l: left){
+                for(TreeNode r: right){
+                    TreeNode root = new TreeNode(i);
+                    root.left = l;
+                    root.right = r;
+                    rst.add(root);
                 }
             }
+        }
         return rst;
     }
 
