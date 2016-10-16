@@ -22,17 +22,18 @@ public class Solution128 {
                  int cur=1;
                  int left=nums[i]-1;
 
-//                 if(map.containsKey(left) && map.get(left)==false){
-//                     map.put(left,true);
-//                     cur++;
-//                     left--;
-//                 }
-//                 int right=nums[i]+1;
-//                 if(map.containsKey(right) && map.get(right)==false){
-//                     map.put(right,true);
-//                     cur++;
-//                     right++;
-//                 }
+                 while(map.containsKey(left) && map.get(left)==false){
+                     map.put(left,true);
+                     cur++;
+                     left--;
+                 }
+
+                 int right=nums[i]+1;
+                 while(map.containsKey(right) && map.get(right)==false){
+                     map.put(right,true);
+                     cur++;
+                     right++;
+                 }
 
                  ret=Math.max(ret,cur);
              }
