@@ -1,5 +1,7 @@
 package SouHu;
 
+import java.util.Arrays;
+
 /**
  * Created by wunengbiao on 2016/9/23.
  */
@@ -12,6 +14,8 @@ public class Test {
         System.out.println(ret.equals(""));
         String words="catsanddog";
         System.out.println(words.startsWith("cats"));
+
+
 
     }
 }

@@ -49,6 +49,12 @@ public class Solution28 {
     public static void main(String[] args){
         Solution28 s=new Solution28();
         int result=s.strStr("ababcabcacbab","abcac");
+        int[] pnext=s.next("abcac");
+        for(int i=0;i<pnext.length;i++){
+            System.out.print(pnext[i]);
+            System.out.print(" ");
+        }
+        System.out.println();
         System.out.println(result);
     }
 }
