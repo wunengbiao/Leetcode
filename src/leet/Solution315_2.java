@@ -38,7 +38,6 @@ public class Solution315_2 {
         mergeSort(nums,start,mid,result);
         mergeSort(nums,mid+1,end,result);
 
-        for(int i=start;i<)
     }
 
 }
