@@ -19,6 +19,12 @@ public class Test {
 
     }
 
+    public static boolean isDigit(char s){
+        if(s-'0'>=0 && s-'0'<=9)
+            return true;
+        return false;
+    }
+
     public static void main(String[] args) throws ParseException {
 //        List<Integer> tmp=new ArrayList<>();
 //        tmp.add(1);
@@ -77,9 +83,10 @@ public class Test {
 //        System.out.println(res);
 //        System.out.println("["+null+"]");
 
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
-        Date date=format.parse("2016-10-27 00:00:00");
-        System.out.println(date.getTime());
+//        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//
+//        Date date=format.parse("2016-10-27 00:00:00");
+//        System.out.println(date.getTime());
     }
+
 }
