@@ -20,9 +20,9 @@ public class Solution394 {
                 while (i < s.length() && isDigit(s.charAt(i))) {
                     n = n * 10 + s.charAt(i++) - '0';
                 }
-                i++;
+                i++;//"["
                 String t = decodeString(s, i);
-                i++;
+                i++;//"]"
                 while (n-- > 0)
                     res += t;
             }
