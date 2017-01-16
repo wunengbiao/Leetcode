@@ -87,6 +87,23 @@ public class Test {
 //
 //        Date date=format.parse("2016-10-27 00:00:00");
 //        System.out.println(date.getTime());
+
+        Set<String> set=new HashSet<>();
+
+        set.add("Hello");
+        set.add("World");
+        set.remove("Hello");
+
+        System.out.println(set);
+
+        List<String> src=new ArrayList<>();
+        src.add("Hello");
+        src.add("World");
+
+        List<String>dest=new ArrayList<>();
+        Collections.copy(dest,src);
+        System.out.println(dest);
+
     }
 
 }

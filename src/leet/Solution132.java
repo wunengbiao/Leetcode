@@ -22,16 +22,22 @@ public class Solution132 {
                 if(s.charAt(i)==s.charAt(j) && (j-i<2||p[i+1][j-1])){
                     p[i][j]=true;
                     f[i]=Math.min(f[i],f[j+1]+1);
+                    System.out.println(Arrays.toString(f));
                 }
             }
         }
-        System.out.println(Arrays.toString(f));
         return f[0];
     }
 
     public static void main(String[] args){
-        int ret=minCut("bb");
+        int ret=minCut("caacecaab");
         System.out.println(ret);
+
+        boolean[]p=new boolean[5];
+        System.out.println(Arrays.toString(p));
+        if(true || p[5]){
+            System.out.println("True");
+        }
     }
 
 }
