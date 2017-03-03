@@ -30,6 +30,7 @@ public class Solution10 {
                     if(p.charAt(j-1)!=s.charAt(i) && p.charAt(j-1)!='.'){
                         dp[i+1][j+1]=dp[i+1][j-1];
                     }else{
+                        System.out.println("p=["+p.charAt(j-1)+"]");
                         dp[i+1][j+1]=(dp[i+1][j]||dp[i][j+1]||dp[i+1][j-1]);
                     }
                 }
@@ -42,7 +43,7 @@ public class Solution10 {
 
     public static void main(String[] args){
         Solution10 s=new Solution10();
-        boolean res=s.isMatch("aab","c*a*b");
+        boolean res=s.isMatch("abb","abb.*");
         System.out.println(res);
 
     }

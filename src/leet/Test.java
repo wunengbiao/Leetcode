@@ -26,6 +26,9 @@ public class Test {
     }
 
     public static void main(String[] args) throws ParseException {
+
+        String a="-123";
+        System.out.println(Integer.parseInt(a));
 //        List<Integer> tmp=new ArrayList<>();
 //        tmp.add(1);
 //        tmp.add(2);
@@ -88,21 +91,30 @@ public class Test {
 //        Date date=format.parse("2016-10-27 00:00:00");
 //        System.out.println(date.getTime());
 
-        Set<String> set=new HashSet<>();
+//        Set<String> set=new HashSet<>();
+//
+//        set.add("Hello");
+//        set.add("World");
+//        set.remove("Hello");
+//
+//        System.out.println(set);
+//
+//        List<String> src=new ArrayList<>();
+//        src.add("Hello");
+//        src.add("World");
+//
+//        List<String>dest=new ArrayList<>();
+//        Collections.copy(dest,src);
+//        System.out.println(dest);
 
-        set.add("Hello");
-        set.add("World");
-        set.remove("Hello");
+//        Set<Integer> s=new TreeSet<>();
+//
+//        s.add(1);System.out.println(s);
+//        s.add(2);System.out.println(s);
+//        s.add(1);System.out.println(s);
+//        s.add(2);System.out.println(s);
 
-        System.out.println(set);
 
-        List<String> src=new ArrayList<>();
-        src.add("Hello");
-        src.add("World");
-
-        List<String>dest=new ArrayList<>();
-        Collections.copy(dest,src);
-        System.out.println(dest);
 
     }
 

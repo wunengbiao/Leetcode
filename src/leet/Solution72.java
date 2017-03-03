@@ -37,7 +37,9 @@ public class Solution72 {
         Solution72 s=new Solution72();
         String word1="intention";
         String word2="execution";
-        int res=s.minDistance(word1,word2);
+        String w7="distance";
+        String w8="springbok";
+        int res=s.minDistance(w7,w8);
         System.out.println(res);
     }
 }

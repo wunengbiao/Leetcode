@@ -11,10 +11,10 @@ public class Solution132 {
         int n=s.length();
         int[] f=new int[n+1];
         boolean[][] p=new boolean[n][n];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++)
-                p[i][j]=false;
-        }
+//        for(int i=0;i<n;i++){
+//            for(int j=0;j<n;j++)
+//                p[i][j]=false;
+//        }
         for(int i=0;i<=n;i++) f[i]=n-1-i;
         System.out.println(Arrays.toString(f));
         for(int i=n-1;i>=0;i--){
@@ -22,7 +22,7 @@ public class Solution132 {
                 if(s.charAt(i)==s.charAt(j) && (j-i<2||p[i+1][j-1])){
                     p[i][j]=true;
                     f[i]=Math.min(f[i],f[j+1]+1);
-                    System.out.println(Arrays.toString(f));
+//                    System.out.println(Arrays.toString(f));
                 }
             }
         }

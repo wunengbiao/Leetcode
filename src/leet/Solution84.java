@@ -20,13 +20,15 @@ public class Solution84 {
                 maxArea = Math.max(maxArea, height[tp] * (s.isEmpty() ? i : i - 1 - s.peek()));
                 i--;
             }
+
+            System.out.println(s);
         }
         return maxArea;
     }
 
     public static void main(String[] args){
         Solution84 s=new Solution84();
-        int[] nums={2,1,3,5,2,3};
+        int[] nums={2,1,5,6,2,3};
         int res=s.largestRectangleArea(nums);
         System.out.println(res);
     }

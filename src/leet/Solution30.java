@@ -8,56 +8,85 @@ import java.util.*;
 public class Solution30 {
 
    public List<Integer> findSubstring(String S, String[] L) {
-        List<Integer> rslt = new ArrayList<Integer>();
 
-        if(L.length==0) return rslt;
+       int n=L[0].length();
 
-        int k = L[0].length();
-        int queues[] = new int[k];
-        List<Map<String, Integer>> maps = new ArrayList<Map<String, Integer>>();
-        Map<String, Integer> map_temp = new HashMap<String, Integer>();
-        for(int i = 0;i < L.length;i++) setMap(map_temp, L[i]);
-        for(int i = 0;i < k;i++) queues[i] = 0;
-        for(int i = 0;i < k;i++) maps.add(new HashMap<String, Integer>(map_temp));
+       Map<String,Integer> position=new HashMap<>();
+       for(int i=0;i<L.length;i++) position.put(L[i],i);
 
-        for(int i = 0;i <= S.length()-k;i++){
-            Map<String, Integer> map = maps.get(i%k);
-            String s = S.substring(i,i+k);
-            if(map.containsKey(s)){
-                queues[i%k]++;
-                map.put(s,map.get(s)-1);
-                if(map.get(s)==0) map.remove(s);
-                if(queues[i%k]==L.length){
-                    rslt.add(i-(queues[i%k]-1)*k);
-                    setMap(map, S.substring(i-k*(queues[i%k]-1),i-k*(queues[i%k]-1)+k));
-                    queues[i%k]--;
-                }
-            }else{
-                if(queues[i%k] > 0){
-                    if(!s.equals(S.substring(i-k*queues[i%k],i-k*queues[i%k]+k)))
-                        while(queues[i%k] > 0){
-                            setMap(map, S.substring(i-k*queues[i%k],i-k*queues[i%k]+k));
-                            queues[i%k]--;
-                        }
-                }
+       Map<String,List<Integer>> map=new HashMap<>();
+       for(int i=0;i<L.length;i++){
+           map.put(L[i],new ArrayList<>());
+       }
+       for(int i=0;i<S.length()-n;i++){
+           if(map.containsKey(S.substring(i,i+n))){
+               map.get(S.substring(i,i+n)).add(i);
+           }
+       }
+       List<Integer> result=new ArrayList<>();
+
+       for(int i=0;i<L.length;i++){
+           if(map.get(L[i]).size()==0) return result;
+       }
+
+       int[] counts=new int[L.length];
+       int[] sequence=new int[L.length];
+       for(int i=0;i<L.length;i++){
+           sequence[i]=map.get(L[i]).get(counts[i]);
+       }
+
+       int min=findMin(sequence);
+       while(counts[min]<map.get(L[min]).size()){
+           if(isSequence(sequence)) result.add(min);
+           else{
+               counts[min]++;
+               sequence[min]=map.get(L[min]).get(counts[min]);
+
+               min=findMin(sequence);
+           }
+       }
+
+
+
+       return result;
+
+
+    }
+
+    public boolean isSequence(int[] sq){
+
+       int[] temp=new int[sq.length];
+       for(int i=0;i<sq.length;i++){
+           temp[i]=sq[i];
+       }
+       Arrays.sort(temp);
+       if(temp.length<=1) return true;
+       int diff=temp[1]-temp[0];
+
+       for(int i=0;i<temp.length-1;i++){
+           if(temp[i+1]-temp[i]!=diff) return false;
+       }
+
+       return true;
+
+    }
+
+    public int findMin(int[] sq){
+        int index=0;
+        for(int i=1;i<sq.length;i++){
+            if(sq[i]<sq[index]){
+                index=i;
             }
         }
-
-        return rslt;
+        return index;
     }
 
-    private void setMap(Map<String, Integer> map, String s){
-        if(!map.containsKey(s))
-            map.put(s,1);
-        else
-            map.put(s,map.get(s)+1);
-        return;
-    }
 
     public static void main(String[] args){
         Solution30 s=new Solution30();
-        String[] words={"foo","bar"};
-        List<Integer> result=s.findSubstring("barfoothefoobarman",words);
+        String[] words={"foo","bar","the"};
+
+        List<Integer> result=s.findSubstring("barfoofodasssssssssssssssdasdassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssobarthefoobarman",words);
         System.out.println(result);
     }
 }
