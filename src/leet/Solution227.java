@@ -67,7 +67,7 @@ public class Solution227 {
 
     public static void main(String[] args){
         Solution227 s=new Solution227();
-        String test="3+2*2";
+        String test="3+2* 2";
         System.out.println("Result is:"+s.calculate(test));
     }
 }

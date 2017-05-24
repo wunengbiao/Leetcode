@@ -1,7 +1,5 @@
 package leet;
 
-import ChinaMobile.Solution;
-
 /**
  * Created by wunengbiao on 2017/1/1.
  */

@@ -1,5 +1,7 @@
 package Others;
 
+import java.util.Arrays;
+
 /**
  * Created by wunengbiao on 2016/10/21.
  */
@@ -25,5 +27,10 @@ public class KMP {
         }
 
         return pnext;
+    }
+
+    public static void main(String[] args){
+        KMP kmp=new KMP();
+        System.out.println(Arrays.toString(kmp.next("aacecaaa#aaacecaa")));
     }
 }

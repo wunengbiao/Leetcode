@@ -32,7 +32,7 @@ public class Solution91 {
 
     public static void main(String[] args) {
         Solution91 s = new Solution91();
-        int res = s.numDecodings("227");
+        int res = s.numDecodings("2226252724242221201918171615141311108787876761721201211012111989898911918293");
         System.out.println(res);
     }
 

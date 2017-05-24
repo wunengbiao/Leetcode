@@ -2,6 +2,8 @@ package DP;
 
 import ChinaMobile.Solution;
 
+import java.util.Arrays;
+
 /**
  * Created by wunengbiao on 2017/2/27.
  */
@@ -18,6 +20,9 @@ public class Best_Time_to_Buy_and_Sell_Stock_II_122 {
             buy[i]=Math.max(buy[i-1],sell[i-1]-prices[i]);
             sell[i]=Math.max(sell[i-1],buy[i-1]+prices[i]);
         }
+
+        System.out.println(Arrays.toString(buy));
+        System.out.println(Arrays.toString(sell));
 
         return sell[prices.length-1];
     }

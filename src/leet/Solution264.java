@@ -13,6 +13,7 @@ public class Solution264 {
         dp[0]=1;
 
         for(int i=1;i<n;i++){
+
             int val=Math.min(Math.min(val_2,val_3),val_5);
             if(val==val_2){
                 dp[i]=val_2;

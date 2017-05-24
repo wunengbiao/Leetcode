@@ -16,6 +16,7 @@ public class Solution110 {
 
     public int deepLength(TreeNode root){
 
+
         if(root==null) return 1;
 
         int left=deepLength(root.left);

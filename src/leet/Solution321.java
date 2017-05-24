@@ -1,5 +1,7 @@
 package leet;
 
+import java.util.Arrays;
+
 /**
  * Created by wunengbiao on 2016/10/23.
  */
@@ -44,5 +46,11 @@ public class Solution321 {
                 result = temp;
         }
         return result;
+    }
+
+    public static void main(String[] args){
+        Solution321 s=new Solution321();
+        int[] array={9, 1, 2, 5, 8, 3};
+        System.out.println(Arrays.toString(s.findMaxKValue(array,3)));
     }
 }

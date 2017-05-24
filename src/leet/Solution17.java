@@ -41,7 +41,7 @@ public class Solution17 {
 
     public static void main(String[] args){
         Solution17 s=new Solution17();
-        List<String> result=s.letterCombinations("23");
+        List<String> result=s.letterCombinations("2332");
         System.out.println(result);
     }
 }

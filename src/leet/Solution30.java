@@ -7,79 +7,88 @@ import java.util.*;
  */
 public class Solution30 {
 
-   public List<Integer> findSubstring(String S, String[] L) {
+   public List<Integer> findSubstring(String s, String[] words) {
 
-       int n=L[0].length();
+       List<Integer> res=new ArrayList<>();
 
-       Map<String,Integer> position=new HashMap<>();
-       for(int i=0;i<L.length;i++) position.put(L[i],i);
+       int n=s.length(),m=words.length,k;
+       if(n==0 || m==0 || (k=words[0].length())==0) return res;
 
-       Map<String,List<Integer>> map=new HashMap<>();
-       for(int i=0;i<L.length;i++){
-           map.put(L[i],new ArrayList<>());
+       HashMap<String,Integer> wDict=new HashMap<>();
+
+       for(String word:words){
+           wDict.put(word,wDict.getOrDefault(word,0)+1);
        }
-       for(int i=0;i<S.length()-n;i++){
-           if(map.containsKey(S.substring(i,i+n))){
-               map.get(S.substring(i,i+n)).add(i);
+
+
+       int i=0,j,start,x,wordsLen=m*k;
+
+       HashMap<String,Integer> curDict=new HashMap<>();
+       String temp,test;
+
+       for(i=0;i<k;i++){
+           curDict.clear();
+           start=i;
+
+           if(start+wordsLen>n) return res;
+
+           for(j=i;j+k<=n;j+=k){
+               test=s.substring(j,j+k);
+
+               if(wDict.containsKey(test)){
+                   if(!curDict.containsKey(test)) {
+                       curDict.put(test, 1);
+                       start = checkFound(res, start, wordsLen, j, k, curDict, s);
+                       continue;
+                   }
+
+                   x=curDict.get(test);
+                   if(x<wDict.get(test)){
+                       curDict.put(test,x+1);
+                       start=checkFound(res,start,wordsLen,j,k,curDict,s);
+                       continue;
+                   }
+
+                   while(!(temp=s.substring(start,start+k)).equals(test)){
+                       decreaseCount(curDict,temp);
+                       start+=k;
+                   }
+
+                   start+=k;
+                   if(start+wordsLen>n)
+                       break;
+                   continue;
+               }
+
+               start=j+k;
+               if(start+wordsLen>n)
+                   break;;
+               curDict.clear();
+
            }
        }
-       List<Integer> result=new ArrayList<>();
 
-       for(int i=0;i<L.length;i++){
-           if(map.get(L[i]).size()==0) return result;
+       return res;
+   }
+
+   public int checkFound(List<Integer> res, int start, int wordsLen, int j, int k,
+                         HashMap<String, Integer> curDict, String s){
+       if(start+wordsLen==j+k){
+           res.add(start);
+           decreaseCount(curDict,s.substring(start,start+k));
+           return start+k;
        }
+       return start;
+   }
 
-       int[] counts=new int[L.length];
-       int[] sequence=new int[L.length];
-       for(int i=0;i<L.length;i++){
-           sequence[i]=map.get(L[i]).get(counts[i]);
+   public void decreaseCount(HashMap<String,Integer> curDict,String key){
+       int x=curDict.get(key);
+       if(x==1)
+           curDict.remove(key);
+       else{
+           curDict.put(key,x-1);
        }
-
-       int min=findMin(sequence);
-       while(counts[min]<map.get(L[min]).size()){
-           if(isSequence(sequence)) result.add(min);
-           else{
-               counts[min]++;
-               sequence[min]=map.get(L[min]).get(counts[min]);
-
-               min=findMin(sequence);
-           }
-       }
-
-
-
-       return result;
-
-
-    }
-
-    public boolean isSequence(int[] sq){
-
-       int[] temp=new int[sq.length];
-       for(int i=0;i<sq.length;i++){
-           temp[i]=sq[i];
-       }
-       Arrays.sort(temp);
-       if(temp.length<=1) return true;
-       int diff=temp[1]-temp[0];
-
-       for(int i=0;i<temp.length-1;i++){
-           if(temp[i+1]-temp[i]!=diff) return false;
-       }
-
-       return true;
-
-    }
-
-    public int findMin(int[] sq){
-        int index=0;
-        for(int i=1;i<sq.length;i++){
-            if(sq[i]<sq[index]){
-                index=i;
-            }
-        }
-        return index;
-    }
+   }
 
 
     public static void main(String[] args){
