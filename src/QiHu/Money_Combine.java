@@ -39,10 +39,10 @@ public class Money_Combine {
         return dp[n-1][value];
     }
     public static void main(String[] args){
-//        int[] arr={1,2,5};
-        int[] arr={2};
+        int[] arr={1,2,5,10,20};
+//        int[] arr={2};
         Money_Combine solution=new Money_Combine();
-        System.out.println(solution.numOfCoints(3,arr));
+        System.out.println(solution.numOfCoints(100,arr));
 //        System.out.println(solution.recursive(1000,0,0,arr));
     }
 }

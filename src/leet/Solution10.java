@@ -43,7 +43,7 @@ public class Solution10 {
 
     public static void main(String[] args){
         Solution10 s=new Solution10();
-        boolean res=s.isMatch("abb","abb.*");
+        boolean res=s.isMatch("abab",".*");
         System.out.println(res);
 
     }

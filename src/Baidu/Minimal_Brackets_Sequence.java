@@ -5,120 +5,108 @@ import java.util.Stack;
 
 /**
  * Created by wunengbiao on 2017/4/10.
+ *
+ * 括号表达式在数学四则计算中经常用到，用于改变运算的优先级，这也是一个关于括号的问题。对于一个给定的括号序列，如果在其中插入"+"和"1"后构成一个正确的数学表达式，则认为该括号序列是正则的。根据该定义，括号序列"(())()"、"()"及"(()(()))"都构成正则序列，序列")("、"(()"和"(()))("不是正则序列。
+
+ 小B正在头疼的一个问题是，给定一个由"("、")"和"?"构成的序列，如何将其中的"?"替换为单个的括号，从而使得该序列成为一个正则序列。更麻烦的事情在于，替换每个"?"都有着不同的代价，如何才能花费最小的代价将给定的序列转换为一个正则序列。作为朋友，小B希望你能够帮到她。
+
+ (??)
+ 1 2
+ 2 8
+ (?)
+ 1 2
+ (??)
+ 2 2
+ 1 1
+
+ 4
+ ()()
+ -1
+ 3
+ ()()
  */
 public class Minimal_Brackets_Sequence {
 
-    String sequence;
-    int[][] cost_table;
     int min_cost;
     String print;
-    int count_left;
-    int count_right;
-    int count_unkown;
-
-    Minimal_Brackets_Sequence(String sequence,int[][] cost_table){
-        this.sequence=sequence;
-        this.cost_table=cost_table;
+    Minimal_Brackets_Sequence(){
         min_cost=Integer.MAX_VALUE;
-        print=null;
-        count_left=0;
-        count_right=0;
-        count_unkown=0;
+        print="-1";
     }
+    public void helper(char[] str,int i ,int stack,int[][] costs,int cost,int pos){
+        if(stack<0 || stack>str.length/2) return;
+        if(i==str.length){
 
-    public boolean isValid(String s){
-        Stack<Character> st=new Stack<>();
-        for(int i=0;i<s.length();i++){
-            if(s.charAt(i)=='(') st.push('(');
-            if(s.charAt(i)==')'){
-                if(st.isEmpty()) return false;
-                st.pop();
-            }
-        }
-        return st.isEmpty();
-    }
-
-
-
-
-    public void count(String s){
-        for(Character c:s.toCharArray()){
-            if(c=='(') count_left++;
-            if(c==')') count_right++;
-            if(c=='?') count_unkown++;
-        }
-    }
-
-    public static int count_w(String s){
-        int res=0;
-        for(Character c:s.toCharArray()){
-            if(c=='?') res++;
-        }
-        return res;
-    }
-
-    public void backtrack(String s,int i,int j,int z,int half,int cost){
-
-        if(i==half && j==half){
-            if(cost<min_cost && isValid(s)){
+            if(cost<min_cost && stack==0){
                 min_cost=cost;
-                print=s;
+                print=new String(str);
             }
+        }else{
+            if(str[i]=='(') helper(str,i+1,stack+1,costs,cost,pos);
+            else if(str[i]==')') helper(str,i+1,stack-1,costs,cost,pos);
+            else{
+                str[i]=')';
+                helper(str,i+1,stack-1,costs,cost+costs[pos][1],pos+1);
+                str[i]='(';
+                helper(str,i+1,stack+1,costs,cost+costs[pos][0],pos+1);
+                str[i]='?';
+            }
+        }
+    }
+
+    public void solve(String s ,int[][] cost){
+        if(s.length()%2==1){
+            System.out.println(-1);
+            return;
+        }
+        int left=0;
+        int right=0;
+        for(Character c:s.toCharArray()){
+            if(c=='(') left++;
+            else if(c==')') right++;
+        }
+
+        if(left>s.length()/2 || right>s.length()/2){
+            System.out.println(-1);
             return;
         }
 
-        if(j<half){
-            String temp=s.replaceFirst("\\?",")");
-            backtrack(temp,i,j+1,z+1,half,cost+cost_table[z][1]);
+        helper(s.toCharArray(),0,0,cost,0,0);
+        if(min_cost==Integer.MAX_VALUE){
+            System.out.println(-1);
+            return;
+        }else{
+            System.out.println(min_cost);
+            System.out.println(print);
+            return;
         }
-        if(i<half){
-            String temp=s.replaceFirst("\\?","(");
-            backtrack(temp,i+1,j,z+1,half,cost+cost_table[z][0]);
-        }
-
     }
 
-    public void solve(){
-
-        if(sequence.length()%2==0 && count_left<= sequence.length()/2 && count_right<= sequence.length()/2){
-            count(sequence);
-            backtrack(sequence,count_left,count_right,0,sequence.length()/2,0);
-        }else {
-            min_cost=-1;
-            print=null;
+    public int count_unkown(String line){
+        int count=0;
+        for(int i=0;i<line.length();i++){
+            if(line.charAt(i)=='?') count++;
         }
-
+        return count;
     }
 
     public static void main(String[] args){
-
-        int y=0;
         Scanner in=new Scanner(System.in);
         Minimal_Brackets_Sequence s;
-        while(in.hasNext()){
-            y++;
-            String sequence=in.nextLine();
-            int count_w=Minimal_Brackets_Sequence.count_w(sequence);
-            int[][] cost_table=new int[count_w][2];
-            for(int i=0;i<count_w;i++){
+        String line;
+        int[][] costs;
+
+        while(true){
+            s=new Minimal_Brackets_Sequence();
+            line=in.nextLine();
+            int n=s.count_unkown(line);
+            costs=new int[n][2];
+            for(int i=0;i<n;i++){
                 String[] nums=in.nextLine().split(" ");
-                cost_table[i][0]=Integer.parseInt(nums[0]);
-                cost_table[i][1]=Integer.parseInt(nums[1]);
+                costs[i][0]=Integer.parseInt(nums[0]);
+                costs[i][1]=Integer.parseInt(nums[1]);
             }
-            s=new Minimal_Brackets_Sequence(sequence,cost_table);
-            s.count(sequence);
-            System.out.println("("+s.count_left+","+s.count_right+","+s.count_unkown+")");
-            System.out.println(y+":"+sequence.length());
-            s.solve();
-
-
-
-            System.out.println(y+":"+s.min_cost);
-            if(s.min_cost!=-1) System.out.println(y+":"+s.print);
-            System.out.println("-------------------------------");
+            s.solve(line,costs);
         }
     }
-
-
-
 }

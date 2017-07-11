@@ -21,11 +21,11 @@ public class BlowBalloon {
         if(n == 0) return 0;
 
         int[][] dp = new int[n][n];
-        for(int i=0;i<n;i++){
-            for(int j=i;j<nums.length;j++){
-                dp[i][j]=Integer.MAX_VALUE;
-            }
-        }
+//        for(int i=0;i<n;i++){
+//            for(int j=i;j<nums.length;j++){
+//                dp[i][j]=Integer.MAX_VALUE;
+//            }
+//        }
 
         for(int len = 0; len < n; len++) {
             for(int i = 0; i < n - len; i++) {
@@ -37,7 +37,7 @@ public class BlowBalloon {
                     int right = k + 1 <= j ? dp[k+1][j] : 0;
                     System.out.println("("+i+","+j+"):"+k);
                     System.out.println(l*nums[k]*r + left + right);
-                    dp[i][j] = Math.min(dp[i][j], l*nums[k]*r + left + right);
+                    dp[i][j] = Math.max(dp[i][j], l*nums[k]*r + left + right);
                 }
             }
         }
@@ -48,7 +48,9 @@ public class BlowBalloon {
     }
     public static void main(String[] args){
         BlowBalloon s=new BlowBalloon();
-        int[] nums={10,1,50,20,5};
+//        int[] nums={10,1,50,20,5};
+        int[] nums={3,1,5,8};
         System.out.println(s.maxCoins(nums));
+
     }
 }

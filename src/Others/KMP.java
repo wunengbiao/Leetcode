@@ -31,6 +31,6 @@ public class KMP {
 
     public static void main(String[] args){
         KMP kmp=new KMP();
-        System.out.println(Arrays.toString(kmp.next("aacecaaa#aaacecaa")));
+        System.out.println(Arrays.toString(kmp.next("ADABCADADA")));
     }
 }

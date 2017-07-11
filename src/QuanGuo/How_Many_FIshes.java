@@ -1,6 +1,5 @@
 package QuanGuo;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -10,18 +9,17 @@ public class How_Many_FIshes {
 
     public int solve(int[] array,int minSize,int maxSize){
         int count=0;
-        if(array.length==0) return maxSize-minSize+1;
-
         int n=array.length;
-        Arrays.sort(array);
-
-        int min=array[0];
-        int max=array[n-1];
 
         for(int i=minSize;i<=maxSize;i++){
-            if(i>=min && i<=max) count++;
-            else if(i>max && i>10*min && i<2*min && i<2*max) count++;
-            else if(i<min && 2*i<min) count++;
+            int flag=1;
+           for(int j=0;j<n;j++){
+               if(i>=array[j]*2 && i<=array[j]*10 || i*2<=array[j] && i*10>=array[j]){
+                   flag=0;
+               }
+           }
+
+           if(flag==1) count++;
         }
 
         return count;

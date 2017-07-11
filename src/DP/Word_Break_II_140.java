@@ -45,7 +45,7 @@ public class Word_Break_II_140 {
             return words;
         }
 
-        for(int i=start+1;i<=max+start&& i<=s.length();i++){
+        for(int i=start+1;i<=max+start&& i<s.length();i++){
             String temp=s.substring(start,i);
             if(wordDict.contains(temp)){
                 List<String> ll;
@@ -65,8 +65,10 @@ public class Word_Break_II_140 {
 //        String s="catsanddog";
 //        List<String> wordDict= Arrays.asList("cat","cats","and","sand","dog");
 
-        String s="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-        List<String> wordDict= Arrays.asList("a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa");
+//        String s="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+//        List<String> wordDict= Arrays.asList("a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa");
+        String s="bb";
+        List<String> wordDict=Arrays.asList("a","b","bbb","bbbb");
         System.out.println(solution.wordBreak(s,wordDict));
 
     }

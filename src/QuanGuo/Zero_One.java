@@ -20,15 +20,28 @@ import java.util.Arrays;
    输出一个整数，表示最少需要的操作次数。如果不能完成，则输出-1
  */
 public class Zero_One {
+    public int solve(int a,int sum,int k){
+        if(a==0) return 0;
+
+        for(int i=1;i<=sum;i++){
+            int mx=i*k;
+
+            if(mx<a) continue;
+            int rest=mx-a;
+            if(rest%2==1) continue;
+
+            int use=(sum-a)*(i/2);
+            use+=a*((i-1)/2);
+            use*=2;
+            if(rest<=use) return i;
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args){
-//        String[] s=".b.".split("\\.");
-//        System.out.println(s.split(".").length);
-//        System.out.println(s.length);
-//        System.out.println(Arrays.toString(s));
-
-//        System.out.println(Integer.toBinaryString(-1999));
-
-//        System.out.println(1^10);
+        Zero_One s=new Zero_One();
+        System.out.println(s.solve(4,4,3));
     }
 
 }
