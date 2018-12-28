@@ -20,13 +20,14 @@ public class Largest_Rectangle_in_Histogram_84 {
                 maxArea=Math.max(maxArea,heights[tp]*(st.isEmpty()?i:i-1-st.peek()));
                 i--;
             }
+            System.out.println(st + "," + maxArea);
         }
         return maxArea;
     }
 
     public static void main(String[] args){
         Largest_Rectangle_in_Histogram_84 s=new Largest_Rectangle_in_Histogram_84();
-        int[] heights={2,1,5,6,2,3};
+        int[] heights={2,1,2};
         System.out.println(s.largestRectangleArea(heights));
     }
 }

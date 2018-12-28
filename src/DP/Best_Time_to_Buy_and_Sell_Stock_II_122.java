@@ -29,7 +29,7 @@ public class Best_Time_to_Buy_and_Sell_Stock_II_122 {
 
     public static void main(String[] args){
         Best_Time_to_Buy_and_Sell_Stock_II_122 s=new Best_Time_to_Buy_and_Sell_Stock_II_122();
-        int[] prices={7,1,5,3,6,4,5};
+        int[] prices={7,1,5,3,6,4};
         System.out.println(s.maxProfit(prices));
     }
 }
